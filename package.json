@@ -11,6 +11,7 @@
     "start": "yoshi-bm start",
     "build": "yoshi-bm build",
     "test": "yoshi-bm test && npm run test:perfer-bundles && npm run test:sled",
+    "test-yoshi-bm": "yoshi-bm test",
     "test:sled": "sled-test-runner remote --ci-only",
     "test:perfer-bundles": "perfer --verbose --json --chunked",
     "lint": "yoshi-bm lint",
@@ -43,8 +44,10 @@
     "yoshi-flow-bm": "^4.1.0"
   },
   "dependencies": {
-    "yoshi-flow-bm-runtime": "^4.1.0",
-    "wix-style-react": "^9.0.0"
+    "@wix/ambassador": "^4.0.491",
+    "@wix/ambassador-node-workshop-scala-app": "^1.0.8",
+    "wix-style-react": "^9.0.0",
+    "yoshi-flow-bm-runtime": "^4.1.0"
   },
   "jest": {
     "preset": "jest-yoshi-preset"

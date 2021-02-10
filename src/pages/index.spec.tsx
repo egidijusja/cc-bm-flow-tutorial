@@ -1,25 +1,32 @@
 import React from 'react';
 import { render, waitForElement } from '@testing-library/react';
-import { PageHeaderTestkit } from 'wix-style-react/dist/testkit';
 import { testkit } from 'yoshi-flow-bm/testkit';
+import { textTestkitFactory } from 'wix-style-react/dist/testkit';
+import { fetch } from '../api/comments.api';
 import Index from './index';
 
-describe('index', () => {
+describe('MyComponent', () => {
   testkit.beforeAndAfter();
-
   beforeEach(() => testkit.reset());
 
-  it('renders a title correctly', async () => {
-    const { TestComponent } = testkit.getBMComponent(Index);
-    const { baseElement, getByTestId } = render(<TestComponent />);
-
-    await waitForElement(() => getByTestId('app-title'));
-
-    const pageHeaderTestkit = PageHeaderTestkit({
-      wrapper: baseElement,
-      dataHook: 'app-title',
+  it('renders initial products', async () => {
+    const { TestComponent } = testkit.getBMComponent(Index, {
+      mocks: [
+        {
+          request: { method: fetch, args: [] },
+          result: () => [{ text: 'Comment', author: 'Egidijus' }],
+        },
+      ],
     });
 
-    expect(await pageHeaderTestkit.exists()).toBe(true);
+    const { baseElement, getByTestId } = render(<TestComponent />);
+    await waitForElement(() => getByTestId('comments-list'));
+
+    const commentsListDriver = textTestkitFactory({
+      wrapper: baseElement,
+      dataHook: 'comments-list',
+    });
+
+    expect(await commentsListDriver.getText()).toMatch(/Egidijus: Comment/);
   });
 });
