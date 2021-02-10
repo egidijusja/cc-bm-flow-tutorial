@@ -1,30 +1,33 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import {
   useTranslation,
   useAppLoaded,
-  Trans,
   useRequest,
+  useHttpClient,
 } from 'yoshi-flow-bm-runtime';
 import { Page, Container, Card, Text } from 'wix-style-react';
-import { fetch } from '../api/comments.api';
+import { addNewComment, fetch } from '../api/comments.api';
 
 const introUrl = 'https://github.com/wix-private/business-manager';
 
 const Index: FC = () => {
   useAppLoaded({ auto: true });
+  const client = useHttpClient();
 
   const { t } = useTranslation();
-  const res = useRequest(fetch);
+  const { data, loading, error } = useRequest(fetch);
 
-  if (res.loading) {
+  const addComment = async () => {
+    await client.request(addNewComment)();
+  };
+
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (res.error) {
+  if (error) {
     return <div>Error</div>;
   }
-
-  console.log(res.data);
 
   return (
     <Page>
@@ -34,7 +37,7 @@ const Index: FC = () => {
           <Card>
             <Card.Content>
               <Text dataHook="comments-list">
-                {res.data.map(({ text, author }, index) => (
+                {data!.map(({ text, author }, index) => (
                   <div key={index}>
                     {author}: {text}
                   </div>
@@ -42,6 +45,7 @@ const Index: FC = () => {
               </Text>
             </Card.Content>
           </Card>
+          <button onClick={addComment}>Add comment</button>
         </Container>
       </Page.Content>
     </Page>

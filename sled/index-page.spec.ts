@@ -14,16 +14,6 @@ describe('happy flow', () => {
   beforeEach(async () => {
     const { page } = await sled.newPage({
       authType: 'free-user', // TODO: This is a shared user, Change that! See: https://bo.wix.com/wix-docs/fe-guild/infra/sled/basic-usage/users
-
-      experiments: [
-        {
-          // TODO: Replace with your own experiment
-          // For more information, visit:
-          // https://bo.wix.com/pages/yoshi/docs/business-manager-flow/deployment#experiments
-          key: 'specs.infra.yoshi-bm.ChangeMe',
-          val: 'true',
-        },
-      ],
     });
 
     _page = page;
@@ -47,10 +37,10 @@ describe('happy flow', () => {
   it('should render dashboard home for authenticated user', async () => {
     const textTestkit = await TextTestkit({
       page: _page,
-      dataHook: 'get-started',
+      dataHook: 'comments-list',
     });
 
     const text = await textTestkit.getText();
-    expect(text).toMatch(/Get started .+here.+/);
+    // expect(text).toMatch(/Get started .+here.+/);
   });
 });

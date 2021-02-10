@@ -7,3 +7,13 @@ export const fetch = method(async function () {
     'eb14988f-d89d-429a-9923-7a771e67cd6d',
   );
 });
+
+export const addNewComment = method(async function () {
+  const commentsService = NodeWorkshopScalaApp().CommentsService();
+  const comment = { text: 'one more', author: 'author' };
+
+  return commentsService(this.context.aspects).add(
+    'eb14988f-d89d-429a-9923-7a771e67cd6d',
+    comment,
+  );
+});
