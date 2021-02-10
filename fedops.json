@@ -1,0 +1,14 @@
+[
+  {
+    "appName": "bm-tutorial.pages.index",
+    "notifications": {
+      "slack_channels": [
+        "bm-tutorial-urgent"
+      ]
+    },
+    "deploy_annotations": [
+      "bm-tutorial"
+    ],
+    "ignore_first_request_roundtrip": true
+  }
+]

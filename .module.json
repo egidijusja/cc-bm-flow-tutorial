@@ -1,0 +1,19 @@
+{
+  "moduleId": "BM_TUTORIAL",
+  "appDefId": "3e878de8-8c90-4ebb-8a8b-55490b0037e8",
+  "isCoreService": true,
+  "routeNamespace": "bm-tutorial",
+  "translations": {
+    "enabled": true
+  },
+  "sentry": {
+    "DSN": "https://c966aacdc34e46fda9a2229ae3d7251b@sentry.wixpress.com/1276",
+    "id": "c966aacdc34e46fda9a2229ae3d7251b",
+    "projectName": "bm-tutorial",
+    "teamName": "egidijusja-cc-bm-tutorial"
+  },
+  "experiments": {
+    "scopes": ["bm-tutorial"]
+  },
+  "enabledByExperiments": ["specs.infra.yoshi-bm.ChangeMe"]
+}
